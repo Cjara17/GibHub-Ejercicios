@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatos - Tenencia Responsable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #f79a0e;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .nav-bar {
+            background-color: #e68a00;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #d67a00;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-box input {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .search-box button {
+            padding: 0.5rem 1rem;
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #283593;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cat-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .cat-card h3 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+        }
+
+        .cat-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .cat-list {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .cat-list li {
+            color: #666;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .cat-list li:before {
+            content: "•";
+            color: #f79a0e;
+            font-weight: bold;
+            position: absolute;
+            left: -1rem;
+        }
+
+        .footer {
+            background-color: #f79a0e;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .header p {
+            margin: 0.5rem 0;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <p>Lo mas importante para los regalones de tu hogar</p>
+        <div class="current-date" id="currentDate"></div>
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="consejos.html">Consejos</a>
+                <a href="perros.html">Perros</a>
+                <a href="gatos.html">Gatos</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar información sobre gatos...">
+                <button type="button">Buscar</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="cat-grid">
+            <article class="cat-card">
+                <img src="assets/images/leycholito.jpg" alt="Razas de Gatos">
+                <h3>Razas de Gatos</h3>
+                <p>Descubre las diferentes razas y sus características:</p>
+                <ul class="cat-list">
+                    <li>Persa - Tranquilo y cariñoso</li>
+                    <li>Siamés - Inteligente y vocal</li>
+                    <li>Maine Coon - Grande y amigable</li>
+                    <li>Bengalí - Activo y juguetón</li>
+                </ul>
+            </article>
+
+            <article class="cat-card">
+                <img src="assets/images/noticia2.jpg" alt="Cuidados Básicos">
+                <h3>Cuidados Básicos</h3>
+                <p>Aspectos fundamentales para el bienestar de tu gato:</p>
+                <ul class="cat-list">
+                    <li>Alimentación balanceada</li>
+                    <li>Higiene del arenero</li>
+                    <li>Cepillado regular</li>
+                    <li>Visitas al veterinario</li>
+                </ul>
+            </article>
+
+            <article class="cat-card">
+                <img src="assets/images/noticia3.jpg" alt="Comportamiento">
+                <h3>Comportamiento</h3>
+                <p>Entiende el comportamiento de tu gato:</p>
+                <ul class="cat-list">
+                    <li>Lenguaje corporal</li>
+                    <li>Comunicación</li>
+                    <li>Hábitos nocturnos</li>
+                    <li>Territorialidad</li>
+                </ul>
+            </article>
+
+            <article class="cat-card">
+                <img src="assets/images/noticia4.jpg" alt="Salud">
+                <h3>Salud y Prevención</h3>
+                <p>Mantén a tu gato saludable:</p>
+                <ul class="cat-list">
+                    <li>Vacunación al día</li>
+                    <li>Control de parásitos</li>
+                    <li>Chequeos regulares</li>
+                    <li>Detección temprana</li>
+                </ul>
+            </article>
+
+            <article class="cat-card">
+                <img src="assets/images/noticia5.jpg" alt="Alimentación">
+                <h3>Alimentación</h3>
+                <p>Guía de alimentación para gatos:</p>
+                <ul class="cat-list">
+                    <li>Tipos de alimento</li>
+                    <li>Porciones adecuadas</li>
+                    <li>Agua fresca</li>
+                    <li>Alimentos prohibidos</li>
+                </ul>
+            </article>
+
+            <article class="cat-card">
+                <img src="assets/images/noticia6.jpg" alt="Enriquecimiento">
+                <h3>Enriquecimiento Ambiental</h3>
+                <p>Mejora el entorno de tu gato:</p>
+                <ul class="cat-list">
+                    <li>Rascadores</li>
+                    <li>Juguetes interactivos</li>
+                    <li>Espacios elevados</li>
+                    <li>Áreas de descanso</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Periódico Digital. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function updateDate() {
+            const now = new Date();
+            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
+        }
+
+        // Actualizar la fecha cuando se carga la página
+        updateDate();
+    </script>
+</body>
+</html> 

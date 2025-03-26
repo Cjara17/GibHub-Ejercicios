@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Tenencia Responsable de Animales de Compañía</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #f79a0e;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .info-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem;
+            width: 80%;
+            max-width: 800px;
+            display: none;
+            z-index: 1000;
+            margin-top: 1rem;
+        }
+
+        .info-dropdown.active {
+            display: block;
+        }
+
+        .info-dropdown h2 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .info-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-section {
+            padding: 1rem;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .info-section h3 {
+            color: #f79a0e;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .toggle-info {
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-info:hover {
+            background-color: #283593;
+        }
+
+        .nav-bar {
+            background-color: #e68a00;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #d67a00;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-box input {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .search-box button {
+            padding: 0.5rem 1rem;
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #283593;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .news-card h3 {
+            margin: 1rem 0;
+            color: #1a237e;
+        }
+
+        .news-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .news-date {
+            color: #f79a0e;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            background-color: #f79a0e;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .header p {
+            margin: 0.5rem 0;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <p>Lo mas importante para los regalones de tu hogar</p>
+        <div class="current-date" id="currentDate"></div>
+        <button class="toggle-info" onclick="toggleInfo()">Más información sobre tenencia responsable</button>
+        <div class="info-dropdown" id="infoDropdown">
+            <h2>¿Qué es la tenencia responsable?</h2>
+            <div class="info-content">
+                <div class="info-section">
+                    <h3>Compromiso</h3>
+                    <p>La tenencia responsable implica un compromiso de por vida con tu mascota, incluyendo su bienestar físico y emocional.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Obligaciones</h3>
+                    <p>Incluye proporcionar alimentación adecuada, atención veterinaria, ejercicio, socialización y un ambiente seguro.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Beneficios</h3>
+                    <p>Mejora la calidad de vida tanto de la mascota como del dueño, creando un vínculo emocional positivo.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Responsabilidades Legales</h3>
+                    <p>Implica cumplir con las leyes locales sobre tenencia de mascotas, incluyendo registro y vacunación.</p>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="consejos.html">Consejos</a>
+                <a href="perros.html">Perros</a>
+                <a href="gatos.html">Gatos</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar noticias...">
+                <button type="button">Buscar</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="news-grid">
+            <article class="news-card">
+                <img src="assets/images/leycholito.jpg" alt="Noticia 1">
+                <h3>Tenencia Responsable de Animales de Compañía</h3>
+                <p>Nueva ley promueve la adopción responsable y el bienestar de las mascotas en todo el país.</p>
+                <div class="news-date">18 de Marzo, 2024</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/noticia2.jpg" alt="Noticia 2">
+                <h3>Innovación en Energías Renovables</h3>
+                <p>Nuevo proyecto de energía solar revoluciona el sector energético nacional.</p>
+                <div class="news-date">17 de Marzo, 2024</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/noticia3.jpg" alt="Noticia 3">
+                <h3>Educación Digital en Tiempos Modernos</h3>
+                <p>Programa gubernamental implementa nuevas tecnologías en escuelas públicas.</p>
+                <div class="news-date">16 de Marzo, 2024</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/noticia4.jpg" alt="Noticia 4">
+                <h3>Turismo Sostenible</h3>
+                <p>Nuevas iniciativas promueven el turismo responsable y la conservación del medio ambiente.</p>
+                <div class="news-date">15 de Marzo, 2024</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/noticia5.jpg" alt="Noticia 5">
+                <h3>Innovación en Salud</h3>
+                <p>Nuevos avances médicos revolucionan el tratamiento de enfermedades crónicas.</p>
+                <div class="news-date">14 de Marzo, 2024</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/noticia6.jpg" alt="Noticia 6">
+                <h3>Desarrollo Urbano Sostenible</h3>
+                <p>Ciudades implementan nuevas políticas para mejorar la calidad de vida de sus habitantes.</p>
+                <div class="news-date">13 de Marzo, 2024</div>
+            </article>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Tenencia Responsable de Animales de Compañía. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function updateDate() {
+            const now = new Date();
+            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
+        }
+
+        function toggleInfo() {
+            const dropdown = document.getElementById('infoDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Cerrar el dropdown cuando se hace clic fuera de él
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('infoDropdown');
+            const toggleButton = document.querySelector('.toggle-info');
+            
+            if (!dropdown.contains(event.target) && !toggleButton.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Actualizar la fecha cuando se carga la página
+        updateDate();
+    </script>
+</body>
+</html> 
