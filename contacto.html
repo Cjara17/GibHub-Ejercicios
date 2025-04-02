@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Tenencia Responsable de Animales de Compañía</title>
+    <title>Contacto - Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -22,6 +22,30 @@
             padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .nav-bar {
@@ -48,6 +72,20 @@
 
         .nav-links a:hover {
             background-color: #d67a00;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
         }
 
         .search-box {
@@ -87,8 +125,29 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 2rem auto;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .contact-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .form-container {
+            flex: 1;
+        }
+
+        .contact-form h2 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .form-group {
@@ -136,11 +195,43 @@
             padding: 1rem;
             margin-top: 2rem;
         }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+        }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
         <nav class="nav-bar">
             <div class="nav-links">
@@ -151,43 +242,62 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar noticias...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar noticias...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
 
     <div class="container">
         <div class="contact-form">
-            <h2>Formulario de Contacto</h2>
-            <form id="contactForm" onsubmit="return handleSubmit(event)">
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="rut">RUT:</label>
-                    <input type="text" id="rut" name="rut" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="comentario">Comentario:</label>
-                    <textarea id="comentario" name="comentario" placeholder="Escribe tu comentario aquí..."></textarea>
-                </div>
-                <button type="submit">Enviar</button>
-            </form>
+            <img src="assets/images/Amor.jpg" alt="Mascotas felices" class="contact-image">
+            <div class="form-container">
+                <form id="contactForm" onsubmit="return handleSubmit(event)">
+                    <h2>Contáctanos</h2>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rut">RUT:</label>
+                        <input type="text" id="rut" name="rut" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario">Comentario:</label>
+                        <textarea id="comentario" name="comentario" placeholder="Escribe tu comentario aquí..."></textarea>
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Tenencia Responsable de Animales de Compañía. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
+        function updateDate() {
+            const now = new Date();
+            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
+        }
+
         function handleSubmit(event) {
             event.preventDefault();
             
@@ -202,6 +312,9 @@
             // Redirigir a la página de confirmación
             window.location.href = 'confirmacion.html';
         }
+
+        // Actualizar la fecha cuando se carga la página
+        updateDate();
     </script>
 </body>
 </html> 

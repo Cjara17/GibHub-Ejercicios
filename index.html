@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenencia Responsable de Animales de Compañía</title>
+    <title>Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -23,6 +23,29 @@
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .info-dropdown {
@@ -142,6 +165,20 @@
             background-color: #d67a00;
         }
 
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
         .search-box {
             display: flex;
             gap: 0.5rem;
@@ -187,18 +224,84 @@
             padding: 1rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: relative;
+            overflow: hidden;
         }
 
         .news-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 250px;
+            object-fit: contain;
             border-radius: 4px;
+            background-color: #f8f8f8;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover img {
+            transform: scale(1.02);
         }
 
         .news-card h3 {
             margin: 1rem 0;
             color: #1a237e;
+        }
+
+        .news-card .content {
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .news-card .content.expanded {
+            max-height: 2000px;
+        }
+
+        .news-card p {
+            color: #666;
+            line-height: 1.6;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            position: relative;
+        }
+
+        .news-card p.expanded {
+            max-height: 1000px;
+        }
+
+        .news-card ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .news-card li {
+            margin: 0.3rem 0;
+            line-height: 1.4;
+        }
+
+        .news-card strong {
+            color: #1a237e;
+            display: block;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1em;
+        }
+
+        .ver-mas-btn {
+            color: #f79a0e;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .ver-mas-btn:hover {
+            text-decoration: underline;
         }
 
         .contact-form {
@@ -260,20 +363,102 @@
             margin: 0.5rem 0;
         }
 
-        .current-date {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #fff;
+        .main-image {
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 800px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .benefits-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background-color: #f79a0e;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
             font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(247, 154, 14, 0.4);
+        }
+
+        .benefits-link:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 154, 14, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(247, 154, 14, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 154, 14, 0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
         }
     </style>
 
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
-        <div class="current-date" id="currentDate"></div>
         <nav class="nav-bar">
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
@@ -283,57 +468,108 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar noticias...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar noticias...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
 
     <div class="container">
+        <div class="main-image">
+            <img src="assets/images/Mascotas.png" alt="Mascotas felices">
+            <a href="https://www.clinicaalemana.cl/articulos/detalle/2022/beneficios-de-convivir-con-animales" target="_blank" class="benefits-link">
+                Saber más
+            </a>
+        </div>
         <div class="news-grid">
             <article class="news-card">
                 <img src="assets/images/leycholito.jpg" alt="Noticia 1">
                 <h3>Ley de Tenencia Responsable de Animales de Compañía</h3>
-                <p>Ley N° 21.020. conocida como "Ley Cholito", establece obligaciones para quienes deciden tener mascotas. </p>
-                <button class="toggle-info" onclick="toggleInfo()">Más información sobre tenencia responsable</button>
-                <div class="info-dropdown" id="infoDropdown">
-                    <h2>¿Qué es la tenencia responsable?</h2>
-                    <div class="info-content">
-                        <div class="info-section">
-                            <h3>Compromiso</h3>
-                            <p>La tenencia responsable implica un compromiso de por vida con tu mascota, incluyendo su bienestar físico y emocional.  Además, prohíbe el maltrato y el abandono animal, y fomenta la educación sobre el cuidado responsable</p>
-                        </div>
-                        <div class="info-section">
-                            <h3>Obligaciones</h3>
-                            <p>Incluye proporcionar alimentación adecuada, atención veterinaria, ejercicio, socialización y un ambiente seguro.</p>
-                        </div>
-                        <div class="info-section">
-                            <h3>Beneficios</h3>
-                            <p>Mejora la calidad de vida tanto de la mascota como del dueño, creando un vínculo emocional positivo.</p>
-                        </div>
-                        <div class="info-section">
-                            <h3>Responsabilidades Legales</h3>
-                            <p>Implica cumplir con las leyes locales sobre tenencia de mascotas, incluyendo registro con microchip, esterilizacion y vacunación.</p>
-                        </div>
-                    </div>
+                <div class="content">
+                    <p>Ley N° 21.020, conocida como "Ley Cholito", establece obligaciones para quienes deciden tener mascotas. Esta normativa representa un avance significativo en la protección de los derechos de los animales en Chile.</p>
+                    <p><strong>Puntos clave de la ley:</strong></p>
+                    <ul>
+                        <li>Obligación de registro e identificación de mascotas con microchip</li>
+                        <li>Responsabilidad civil por daños causados por las mascotas</li>
+                        <li>Prohibición de maltrato y abandono animal</li>
+                        <li>Obligación de proporcionar alimentación, refugio y atención veterinaria</li>
+                        <li>Promoción de la esterilización de mascotas</li>
+                    </ul>
+                    <p><strong>Beneficios de la implementación de la ley:</strong></p>
+                    <ul>
+                        <li>Mejor control de la población de mascotas</li>
+                        <li>Reducción de casos de maltrato animal</li>
+                        <li>Mayor responsabilidad en la tenencia de mascotas</li>
+                        <li>Mejora en el bienestar animal general</li>
+                    </ul>
                 </div>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia2.jpg" alt="Noticia 2">
-                <h3>Título de la Noticia 2</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <img src="assets/images/calor.jpg" alt="Noticia 2">
+                <h3>Tips para cuidar a tu mascota en verano</h3>
+                <div class="content">
+                    <p>Es importante preparar a nuestras mascotas para las altas temperaturas.
+                       Los expertos recomiendan: </p>
+                    <p><strong>Para perros:</strong></p>
+                    <ul>
+                        <li>Usar protector solar en las áreas expuestas</li>
+                        <li>Mantener el pelaje limpio pero no demasiado corto</li>
+                        <li>Programar paseos en las primeras horas de la mañana o al atardecer</li>
+                        <li>Proteger las patas del pavimento caliente</li>
+                        <li>Estar atentos a signos de golpe de calor (jadeo excesivo, letargo, vómitos)</li>
+                    </ul>
+                    <p><strong>Para gatos:</strong></p>
+                    <ul>
+                        <li>Proporcionar acceso a agua fresca constantemente</li>
+                        <li>Crear lugares frescos y sombreados para descansar</li>
+                        <li>Mantener las ventanas con mallas de seguridad</li>
+                        <li>Ofrecer juguetes interactivos para mantenerlos activos en interiores</li>
+                        <li>Monitorear signos de deshidratación</li>
+                    </ul>
+                </div>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia3.jpg" alt="Noticia 3">
-                <h3>Título de la Noticia 3</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <img src="assets/images/invierno.jpg" alt="Noticia 3">
+                <h3>Tips para cuidar a tu mascota en invierno</h3>
+                <div class="content">
+                    <p>Durante el invierno, nuestras mascotas necesitan cuidados especiales para mantenerlas saludables y cómodas. Aquí algunos consejos importantes:</p>
+                    <p><strong>Para perros:</strong></p>
+                    <ul>
+                        <li>Mantener un refugio cálido y seco, alejado de corrientes de aire</li>
+                        <li>Usar ropa de abrigo para razas de pelo corto o perros pequeños</li>
+                        <li>Secar bien su pelaje después de los paseos bajo la lluvia</li>
+                        <li>Evitar baños frecuentes para no eliminar sus aceites naturales</li>
+                        <li>Proteger sus patas del frío y sustancias anticongelantes</li>
+                    </ul>
+                    <p><strong>Para gatos:</strong></p>
+                    <ul>
+                        <li>Proporcionar lugares cálidos y elevados para descansar</li>
+                        <li>Aumentar ligeramente su ración de comida</li>
+                        <li>Mantener su caja de arena en un lugar templado</li>
+                        <li>Revisar el motor del auto antes de arrancar (pueden buscar refugio)</li>
+                        <li>Asegurar que tengan acceso a agua que no esté demasiado fría</li>
+                    </ul>
+                    <p><strong>Cuidados generales:</strong></p>
+                    <ul>
+                        <li>Mantener sus vacunas al día, el frío puede bajar las defensas</li>
+                        <li>Realizar chequeos veterinarios preventivos</li>
+                        <li>Estar atentos a signos de hipotermia o resfriados</li>
+                        <li>Mantener una rutina de ejercicio adaptada al clima</li>
+                    </ul>
+                </div>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
             </article>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Periódico Digital. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -353,6 +589,12 @@
         function toggleInfo() {
             const dropdown = document.getElementById('infoDropdown');
             dropdown.classList.toggle('active');
+        }
+
+        function toggleText(button) {
+            const content = button.previousElementSibling;
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded') ? 'Ver menos' : 'Ver más';
         }
 
         // Cerrar el dropdown cuando se hace clic fuera de él

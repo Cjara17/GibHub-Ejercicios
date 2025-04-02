@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perros - Tenencia Responsable</title>
+    <title>Perros - Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -22,6 +22,30 @@
             padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .nav-bar {
@@ -50,6 +74,20 @@
 
         .nav-links a:hover {
             background-color: #d67a00;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
         }
 
         .search-box {
@@ -84,11 +122,82 @@
             padding: 2rem;
         }
 
+        .main-image {
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .paw-button {
+            background-color: #f79a0e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            max-width: fit-content;
+        }
+
+        .paw-button:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+
+        .paw-icon {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .paw-icon::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+
         .dog-grid {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .dog-grid.show {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .dog-card {
@@ -114,6 +223,9 @@
         .dog-card h3 {
             color: #1a237e;
             margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f79a0e;
+            padding-bottom: 0.5rem;
         }
 
         .dog-card p {
@@ -129,8 +241,10 @@
 
         .dog-list li {
             color: #666;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.4;
         }
 
         .dog-list li:before {
@@ -138,7 +252,8 @@
             color: #f79a0e;
             font-weight: bold;
             position: absolute;
-            left: -1rem;
+            left: 0;
+            top: 0;
         }
 
         .footer {
@@ -153,19 +268,62 @@
             margin: 0.5rem 0;
         }
 
-        .current-date {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #fff;
+        .video-container {
+            margin-top: 1rem;
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
             font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
-        <div class="current-date" id="currentDate"></div>
         <nav class="nav-bar">
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
@@ -175,91 +333,106 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar información sobre perros...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar información sobre perros...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
 
     <div class="container">
-        <div class="dog-grid">
+        <div class="main-image">
+            <img src="assets/images/CuidadosPerros.jpg" alt="Cuidados de Perros">
+        </div>
+        <button class="paw-button" onclick="toggleDogInfo()">
+            <span class="paw-icon"></span>
+            Conocer más de los perros
+        </button>
+        <div class="dog-grid" id="dogInfo">
             <article class="dog-card">
-                <img src="assets/images/leycholito.jpg" alt="Razas de Perros">
-                <h3>Razas de Perros</h3>
-                <p>Descubre las diferentes razas y sus características:</p>
-                <ul class="dog-list">
-                    <li>Labrador Retriever - Amigable y leal</li>
-                    <li>Pastor Alemán - Inteligente y protector</li>
-                    <li>Golden Retriever - Paciente y cariñoso</li>
-                    <li>Bulldog - Tranquilo y amigable</li>
-                </ul>
-            </article>
-
-            <article class="dog-card">
-                <img src="assets/images/noticia2.jpg" alt="Cuidados Básicos">
                 <h3>Cuidados Básicos</h3>
                 <p>Aspectos fundamentales para el bienestar de tu perro:</p>
                 <ul class="dog-list">
-                    <li>Alimentación balanceada</li>
-                    <li>Ejercicio diario</li>
-                    <li>Higiene regular</li>
-                    <li>Visitas al veterinario</li>
+                    <li>Alimentación balanceada y agua fresca</li>
+                    <li>Ejercicio diario según edad y raza</li>
+                    <li>Higiene regular y cepillado</li>
+                    <li>Visitas periódicas al veterinario</li>
+                    <li>Espacio adecuado para descansar</li>
+                    <li>Collar con identificación</li>
                 </ul>
             </article>
 
             <article class="dog-card">
-                <img src="assets/images/noticia3.jpg" alt="Entrenamiento">
                 <h3>Entrenamiento</h3>
                 <p>Consejos para entrenar a tu perro:</p>
                 <ul class="dog-list">
-                    <li>Comandos básicos</li>
-                    <li>Socialización</li>
-                    <li>Refuerzo positivo</li>
-                    <li>Paciencia y constancia</li>
+                    <li>Comandos básicos (sienta, echado, ven)</li>
+                    <li>Socialización temprana</li>
+                    <li>Refuerzo positivo constante</li>
+                    <li>Paciencia y constancia en el entrenamiento</li>
+                    <li>Establecer rutinas claras</li>
+                    <li>Evitar castigos físicos</li>
                 </ul>
             </article>
 
             <article class="dog-card">
-                <img src="assets/images/noticia4.jpg" alt="Salud">
                 <h3>Salud y Prevención</h3>
                 <p>Mantén a tu perro saludable:</p>
                 <ul class="dog-list">
-                    <li>Vacunación al día</li>
-                    <li>Control de parásitos</li>
-                    <li>Chequeos regulares</li>
-                    <li>Detección temprana</li>
+                    <li>Calendario de vacunación al día</li>
+                    <li>Control regular de parásitos internos y externos</li>
+                    <li>Chequeos veterinarios preventivos</li>
+                    <li>Detección temprana de enfermedades</li>
+                    <li>Esterilización responsable</li>
+                    <li>Higiene dental regular</li>
                 </ul>
             </article>
 
             <article class="dog-card">
-                <img src="assets/images/noticia5.jpg" alt="Alimentación">
                 <h3>Alimentación</h3>
                 <p>Guía de alimentación para perros:</p>
                 <ul class="dog-list">
-                    <li>Tipos de alimento</li>
-                    <li>Porciones adecuadas</li>
-                    <li>Horarios de comida</li>
-                    <li>Alimentos prohibidos</li>
+                    <li>Alimento específico según edad y tamaño</li>
+                    <li>Porciones adecuadas y horarios fijos</li>
+                    <li>Evitar alimentos tóxicos (chocolate, uvas)</li>
+                    <li>Snacks saludables como premio</li>
+                    <li>Agua limpia y fresca siempre disponible</li>
+                    <li>Consultar cambios de dieta con el veterinario</li>
                 </ul>
             </article>
 
             <article class="dog-card">
-                <img src="assets/images/noticia6.jpg" alt="Actividad Física">
                 <h3>Actividad Física</h3>
                 <p>Importancia del ejercicio:</p>
                 <ul class="dog-list">
-                    <li>Paseos diarios</li>
-                    <li>Juegos interactivos</li>
-                    <li>Ejercicios según edad</li>
-                    <li>Actividades al aire libre</li>
+                    <li>Paseos diarios de al menos 30 minutos</li>
+                    <li>Juegos interactivos para estimulación</li>
+                    <li>Ejercicios adaptados a edad y condición</li>
+                    <li>Actividades al aire libre supervisadas</li>
+                    <li>Descansos adecuados entre actividades</li>
+                    <li>Socialización con otros perros</li>
                 </ul>
+            </article>
+
+            <article class="dog-card">
+                <h3>Videos Graciosos de Perritos</h3>
+                <p>Disfruta de esta recopilación de momentos divertidos:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/PlrEc3E0WTY" 
+                            title="Videos graciosos de perros"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
             </article>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Periódico Digital. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -274,6 +447,18 @@
             const year = now.getFullYear();
             
             document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
+        }
+
+        function toggleDogInfo() {
+            const dogInfo = document.getElementById('dogInfo');
+            dogInfo.classList.toggle('show');
+            const button = document.querySelector('.paw-button');
+            button.textContent = dogInfo.classList.contains('show') ? 'Ocultar información' : 'Conocer más de los perros';
+            if (dogInfo.classList.contains('show')) {
+                button.innerHTML = '<span class="paw-icon"></span>Ocultar información';
+            } else {
+                button.innerHTML = '<span class="paw-icon"></span>Conocer más de los perros';
+            }
         }
 
         // Actualizar la fecha cuando se carga la página

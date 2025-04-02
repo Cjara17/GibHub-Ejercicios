@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias - Tenencia Responsable de Animales de Compañía</title>
+    <title>Noticias - Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -23,6 +23,29 @@
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .info-dropdown {
@@ -115,6 +138,20 @@
             background-color: #d67a00;
         }
 
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
         .search-box {
             display: flex;
             gap: 0.5rem;
@@ -168,9 +205,16 @@
 
         .news-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 250px;
+            object-fit: contain;
             border-radius: 4px;
+            background-color: #f8f8f8;
+            padding: 0.5rem;
+        }
+
+        .news-card:hover img {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
         }
 
         .news-card h3 {
@@ -181,6 +225,31 @@
         .news-card p {
             color: #666;
             line-height: 1.6;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            position: relative;
+        }
+
+        .news-card p.expanded {
+            max-height: 1000px;
+        }
+
+        .ver-mas-btn {
+            color: #f79a0e;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .ver-mas-btn:hover {
+            text-decoration: underline;
         }
 
         .news-date {
@@ -201,41 +270,43 @@
             margin: 0.5rem 0;
         }
 
-        .current-date {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #fff;
+        .header h1 {
+            font-size: 3.5rem;
             font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
-        <div class="current-date" id="currentDate"></div>
-        <button class="toggle-info" onclick="toggleInfo()">Más información sobre tenencia responsable</button>
-        <div class="info-dropdown" id="infoDropdown">
-            <h2>¿Qué es la tenencia responsable?</h2>
-            <div class="info-content">
-                <div class="info-section">
-                    <h3>Compromiso</h3>
-                    <p>La tenencia responsable implica un compromiso de por vida con tu mascota, incluyendo su bienestar físico y emocional.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Obligaciones</h3>
-                    <p>Incluye proporcionar alimentación adecuada, atención veterinaria, ejercicio, socialización y un ambiente seguro.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Beneficios</h3>
-                    <p>Mejora la calidad de vida tanto de la mascota como del dueño, creando un vínculo emocional positivo.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Responsabilidades Legales</h3>
-                    <p>Implica cumplir con las leyes locales sobre tenencia de mascotas, incluyendo registro y vacunación.</p>
-                </div>
-            </div>
-        </div>
         <nav class="nav-bar">
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
@@ -245,9 +316,12 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar noticias...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar noticias...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
@@ -255,46 +329,59 @@
     <div class="container">
         <div class="news-grid">
             <article class="news-card">
-                <img src="assets/images/leycholito.jpg" alt="Noticia 1">
-                <h3>Tenencia Responsable de Animales de Compañía</h3>
-                <p>Nueva ley promueve la adopción responsable y el bienestar de las mascotas en todo el país.</p>
-                <div class="news-date">18 de Marzo, 2024</div>
+                <img src="assets/images/asilvestrados.jpg" alt="Noticia 1">
+                <h3>Perros responsables del 29% de la depredación de ganado en Chile</h3>
+                <p>Las estadísticas recientes indican que los perros se han convertido en el principal depredador del ganado doméstico y de la fauna silvestre en nuestro país, una situación de creciente gravedad sin solución efectiva. Para hacer un diagnóstico multisectorial y abordar este problema, el Director Nacional del Servicio Agrícola y Ganadero, SAG, José Guajardo Reyes, y el Decano de la Facultad de Ciencias Veterinarias y Pecuarias de la Universidad de Chile, José Manuel Yáñez, lideraron el seminario "Perros de libre deambular: Impactos y estrategias para la convivencia responsable con la fauna y la ganadería". El objetivo fue analizar la situación actual y promover soluciones que mitiguen los daños al sector agrícola y al equilibrio ecológico nacional.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">18 de Marzo, 2025</div>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia2.jpg" alt="Noticia 2">
-                <h3>Innovación en Energías Renovables</h3>
-                <p>Nuevo proyecto de energía solar revoluciona el sector energético nacional.</p>
-                <div class="news-date">17 de Marzo, 2024</div>
+                <img src="assets/images/proteccion.jpeg" alt="Ley de Protección Animal">
+                <h3>Nueva Ley de Protección Animal: Un Paso Adelante en Chile</h3>
+                <p>El Senado chileno ha aprobado una histórica ley de protección animal que establece sanciones más severas para el maltrato animal y promueve la tenencia responsable. La nueva legislación incluye penas de hasta 5 años de prisión para casos graves de maltrato, multas significativas y la prohibición de tener animales por hasta 10 años para los infractores. Además, la ley establece la obligatoriedad de microchip para perros y gatos, y crea un registro nacional de mascotas. Los expertos aseguran que esta normativa marcará un antes y un después en la protección de los derechos de los animales en nuestro país. La implementación de esta ley también incluye programas de educación ciudadana sobre tenencia responsable y la creación de centros de rehabilitación para animales maltratados. Las autoridades esperan que estas medidas contribuyan significativamente a reducir los casos de maltrato animal y mejorar el bienestar de las mascotas en todo el territorio nacional.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">22 de agosto, 2024</div>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia3.jpg" alt="Noticia 3">
-                <h3>Educación Digital en Tiempos Modernos</h3>
-                <p>Programa gubernamental implementa nuevas tecnologías en escuelas públicas.</p>
-                <div class="news-date">16 de Marzo, 2024</div>
+                <img src="assets/images/AppMovil.jpeg" alt="App de monitoreo veterinario">
+                <h3>Nueva App de Monitoreo Veterinario en Tiempo Real</h3>
+                <p>Una revolucionaria aplicación móvil desarrollada por veterinarios chilenos permite monitorear la salud de las mascotas en tiempo real. La app "VetCare" utiliza sensores inteligentes que se colocan en el collar de perros y gatos para registrar su actividad física, frecuencia cardíaca, temperatura corporal y patrones de sueño. Los datos se transmiten directamente al veterinario de cabecera, permitiendo una detección temprana de problemas de salud. La aplicación también incluye recordatorios para vacunas, desparasitación y citas médicas, así como un historial médico digital completo. Más de 10,000 mascotas ya están siendo monitoreadas a través de esta innovadora plataforma, que ha demostrado reducir en un 40% las visitas de emergencia al veterinario gracias a la detección preventiva de problemas de salud.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">20 de Marzo, 2025</div>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia4.jpg" alt="Noticia 4">
-                <h3>Turismo Sostenible</h3>
-                <p>Nuevas iniciativas promueven el turismo responsable y la conservación del medio ambiente.</p>
-                <div class="news-date">15 de Marzo, 2024</div>
+                <img src="assets/images/Rehabilitacion.jpg" alt="Noticia 3">
+                <h3>Nuevo Centro de Rehabilitación de Fauna Silvestre</h3>
+                <p>El Ministerio del Medio Ambiente inauguró el primer centro de rehabilitación de fauna silvestre en la región de Valparaíso. Este moderno centro, que cuenta con tecnología de última generación, podrá atender hasta 500 animales al año, incluyendo aves rapaces, mamíferos marinos y especies terrestres. El proyecto, que tuvo una inversión de 2.5 millones de dólares, incluye áreas de cuarentena, rehabilitación y pre-liberación, además de un centro de educación ambiental para visitantes.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">15 de Marzo, 2025</div>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia5.jpg" alt="Noticia 5">
-                <h3>Innovación en Salud</h3>
-                <p>Nuevos avances médicos revolucionan el tratamiento de enfermedades crónicas.</p>
-                <div class="news-date">14 de Marzo, 2024</div>
+                <img src="assets/images/DelfinChileno.jpeg" alt="Noticia 4">
+                <h3>Descubren Nueva Especie de Delfín en Chile</h3>
+                <p>Un equipo de investigadores chilenos y extranjeros ha descubierto una nueva especie de delfín en las costas del sur de Chile. El "Delfín Chileno" (Delphinus chilensis) se distingue por su patrón de coloración único y su comportamiento social particular. La investigación, publicada en la revista Nature, sugiere que esta especie podría estar en peligro debido a la actividad pesquera y el cambio climático. Los científicos están trabajando en un plan de conservación para proteger esta nueva especie.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">10 de Marzo, 2025</div>
             </article>
             <article class="news-card">
-                <img src="assets/images/noticia6.jpg" alt="Noticia 6">
-                <h3>Desarrollo Urbano Sostenible</h3>
-                <p>Ciudades implementan nuevas políticas para mejorar la calidad de vida de sus habitantes.</p>
-                <div class="news-date">13 de Marzo, 2024</div>
+                <img src="assets/images/EsterilizacionMovil.jpg" alt="Noticia 5">
+                <h3>Programa Nacional de Esterilización Móvil</h3>
+                <p>El gobierno lanzó un ambicioso programa de esterilización móvil que recorrerá todo el país. La iniciativa, que cuenta con 10 unidades móviles equipadas con tecnología de última generación, tiene como objetivo esterilizar a 50,000 perros y gatos en situación de calle durante 2025. El programa incluye también microchip y registro de los animales, además de educación sobre tenencia responsable para las comunidades visitadas.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">5 de Marzo, 2025</div>
+            </article>
+            <article class="news-card">
+                <img src="assets/images/AverUrbanas.jpg" alt="Noticia 6">
+                <h3>Nueva Ley de Protección de Aves Urbanas</h3>
+                <p>El Congreso aprobó una nueva ley que protege a las aves urbanas y establece medidas para su conservación. La normativa incluye la instalación obligatoria de dispositivos anti-colisión en edificios de más de 10 pisos, la creación de corredores verdes urbanos y la protección de nidos durante la época reproductiva. La ley también establece multas para quienes dañen o destruyan nidos de aves protegidas.</p>
+                <button class="ver-mas-btn" onclick="toggleText(this)">Ver más</button>
+                <div class="news-date">1 de Marzo, 2025</div>
             </article>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Tenencia Responsable de Animales de Compañía. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -311,23 +398,14 @@
             document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
         }
 
-        function toggleInfo() {
-            const dropdown = document.getElementById('infoDropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        // Cerrar el dropdown cuando se hace clic fuera de él
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('infoDropdown');
-            const toggleButton = document.querySelector('.toggle-info');
-            
-            if (!dropdown.contains(event.target) && !toggleButton.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
-
         // Actualizar la fecha cuando se carga la página
         updateDate();
+
+        function toggleText(button) {
+            const paragraph = button.previousElementSibling;
+            paragraph.classList.toggle('expanded');
+            button.textContent = paragraph.classList.contains('expanded') ? 'Ver menos' : 'Ver más';
+        }
     </script>
 </body>
 </html> 

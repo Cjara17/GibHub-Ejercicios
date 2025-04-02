@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatos - Tenencia Responsable</title>
+    <title>Gatos - Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -22,6 +22,41 @@
             padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header p {
+            margin: 0.5rem 0;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
         }
 
         .nav-bar {
@@ -31,6 +66,8 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .nav-links {
@@ -50,6 +87,13 @@
 
         .nav-links a:hover {
             background-color: #d67a00;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .search-box {
@@ -84,11 +128,82 @@
             padding: 2rem;
         }
 
+        .main-image {
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .paw-button {
+            background-color: #f79a0e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            max-width: fit-content;
+        }
+
+        .paw-button:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+
+        .paw-icon {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .paw-icon::before {
+            content: "🐱";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+
         .cat-grid {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .cat-grid.show {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cat-card {
@@ -96,24 +211,19 @@
             border-radius: 8px;
             padding: 1.5rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
 
         .cat-card:hover {
             transform: translateY(-5px);
         }
 
-        .cat-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
         .cat-card h3 {
             color: #1a237e;
             margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f79a0e;
+            padding-bottom: 0.5rem;
         }
 
         .cat-card p {
@@ -129,8 +239,10 @@
 
         .cat-list li {
             color: #666;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.4;
         }
 
         .cat-list li:before {
@@ -138,7 +250,8 @@
             color: #f79a0e;
             font-weight: bold;
             position: absolute;
-            left: -1rem;
+            left: 0;
+            top: 0;
         }
 
         .footer {
@@ -149,23 +262,43 @@
             margin-top: 2rem;
         }
 
-        .header p {
-            margin: 0.5rem 0;
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
-        .current-date {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #fff;
-            font-weight: bold;
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
-        <div class="current-date" id="currentDate"></div>
         <nav class="nav-bar">
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
@@ -175,91 +308,101 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar información sobre gatos...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar información sobre gatos...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
 
     <div class="container">
-        <div class="cat-grid">
+        <div class="main-image">
+            <img src="assets/images/CuidadosGatos.png" alt="Cuidados de Gatos">
+        </div>
+        <button class="paw-button" onclick="toggleCatInfo()">
+            <span class="paw-icon"></span>
+            Conocer más de los gatos
+        </button>
+        <div class="cat-grid" id="catInfo">
             <article class="cat-card">
-                <img src="assets/images/leycholito.jpg" alt="Razas de Gatos">
-                <h3>Razas de Gatos</h3>
-                <p>Descubre las diferentes razas y sus características:</p>
-                <ul class="cat-list">
-                    <li>Persa - Tranquilo y cariñoso</li>
-                    <li>Siamés - Inteligente y vocal</li>
-                    <li>Maine Coon - Grande y amigable</li>
-                    <li>Bengalí - Activo y juguetón</li>
-                </ul>
-            </article>
-
-            <article class="cat-card">
-                <img src="assets/images/noticia2.jpg" alt="Cuidados Básicos">
                 <h3>Cuidados Básicos</h3>
-                <p>Aspectos fundamentales para el bienestar de tu gato:</p>
+                <p>Tu gato necesita</p>
                 <ul class="cat-list">
-                    <li>Alimentación balanceada</li>
-                    <li>Higiene del arenero</li>
-                    <li>Cepillado regular</li>
-                    <li>Visitas al veterinario</li>
+                    <li>Alimentar 2-3 veces al día con comida especial para gatos</li>
+                    <li>Mantener el arenero limpio y cambiar arena cada semana</li>
+                    <li>Cepillar el pelaje regularmente, a diario si es pelo largo</li>
+                    <li>Visitar al veterinario una vez al año para control</li>
+                    <li>Usar collar con identificación o microchip</li>
                 </ul>
             </article>
 
             <article class="cat-card">
-                <img src="assets/images/noticia3.jpg" alt="Comportamiento">
                 <h3>Comportamiento</h3>
-                <p>Entiende el comportamiento de tu gato:</p>
+                <p>Así se comunica tu gato</p>
                 <ul class="cat-list">
-                    <li>Lenguaje corporal</li>
-                    <li>Comunicación</li>
-                    <li>Hábitos nocturnos</li>
-                    <li>Territorialidad</li>
+                    <li>Cuando levanta la cola te saluda, si baja las orejas está molesto</li>
+                    <li>Cada maullido tiene un significado diferente</li>
+                    <li>Son más juguetones temprano y al anochecer</li>
+                    <li>Les gusta tener su propio espacio en casa</li>
+                    <li>Observa si cambia su comportamiento habitual</li>
                 </ul>
             </article>
 
             <article class="cat-card">
-                <img src="assets/images/noticia4.jpg" alt="Salud">
                 <h3>Salud y Prevención</h3>
-                <p>Mantén a tu gato saludable:</p>
+                <p>Para mantenerlo sano</p>
                 <ul class="cat-list">
-                    <li>Vacunación al día</li>
-                    <li>Control de parásitos</li>
-                    <li>Chequeos regulares</li>
-                    <li>Detección temprana</li>
+                    <li>Aplicar la vacuna triple felina cada año</li>
+                    <li>Desparasitar según indique el veterinario</li>
+                    <li>Revisar su peso y salud regularmente</li>
+                    <li>Esterilizar entre los 4 y 6 meses de edad</li>
+                    <li>Tener un botiquín básico en casa</li>
                 </ul>
             </article>
 
             <article class="cat-card">
-                <img src="assets/images/noticia5.jpg" alt="Alimentación">
                 <h3>Alimentación</h3>
-                <p>Guía de alimentación para gatos:</p>
+                <p>Para una buena nutrición</p>
                 <ul class="cat-list">
-                    <li>Tipos de alimento</li>
-                    <li>Porciones adecuadas</li>
-                    <li>Agua fresca</li>
-                    <li>Alimentos prohibidos</li>
+                    <li>Mezclar alimento seco y húmedo en su dieta</li>
+                    <li>Mantener agua limpia siempre disponible</li>
+                    <li>No dar chocolate, cebolla, ajo ni lácteos</li>
+                    <li>Ajustar la cantidad según su peso y edad</li>
+                    <li>Dar premios de forma moderada</li>
                 </ul>
             </article>
 
             <article class="cat-card">
-                <img src="assets/images/noticia6.jpg" alt="Enriquecimiento">
                 <h3>Enriquecimiento Ambiental</h3>
-                <p>Mejora el entorno de tu gato:</p>
+                <p>Para que viva feliz</p>
                 <ul class="cat-list">
-                    <li>Rascadores</li>
-                    <li>Juguetes interactivos</li>
-                    <li>Espacios elevados</li>
-                    <li>Áreas de descanso</li>
+                    <li>Colocar rascadores donde más le gusten</li>
+                    <li>Darle juguetes como plumas, pelotas y láser</li>
+                    <li>Preparar lugares altos para que observe</li>
+                    <li>Crear espacios tranquilos para su descanso</li>
+                    <li>Tener hierba gatera disponible</li>
                 </ul>
+            </article>
+
+            <article class="cat-card">
+                <h3>Videos Graciosos de Gatitos</h3>
+                <p>Disfruta de esta recopilación de momentos divertidos:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Wo8yhLMemGk" 
+                            title="Videos graciosos de gatos"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
             </article>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Periódico Digital. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -274,6 +417,17 @@
             const year = now.getFullYear();
             
             document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
+        }
+
+        function toggleCatInfo() {
+            const catInfo = document.getElementById('catInfo');
+            catInfo.classList.toggle('show');
+            const button = document.querySelector('.paw-button');
+            if (catInfo.classList.contains('show')) {
+                button.innerHTML = '<span class="paw-icon"></span>Ocultar información';
+            } else {
+                button.innerHTML = '<span class="paw-icon"></span>Conocer más de los gatos';
+            }
         }
 
         // Actualizar la fecha cuando se carga la página

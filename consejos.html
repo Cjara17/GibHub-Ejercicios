@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consejos - Tenencia Responsable de Animales de Compañía</title>
+    <title>Consejos - Patitas Informadas</title>
     <style>
         * {
             margin: 0;
@@ -23,6 +23,29 @@
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             position: relative;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm6 8h-2v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H6c-2.2 0-4 1.8-4 4v6h20v-6c0-2.2-1.8-4-4-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 24 24' fill='rgba(255,255,255,0.4)'%3E%3Cpath d='M4.5 14.5c-1.9 0-3.5-1.6-3.5-3.5S2.6 7.5 4.5 7.5 8 9.1 8 11s-1.6 3.5-3.5 3.5zm15 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5S23 9.1 23 11s-1.6 3.5-3.5 3.5zm-7.5 3c-1.9 0-3.5-1.6-3.5-3.5S10.1 8 12 8s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm-4-7c-1.9 0-3.5-1.6-3.5-3.5S8.6 4 10.5 4s3.5 1.6 3.5 3.5S12.4 10.5 10.5 10.5zm7 0c-1.9 0-3.5-1.6-3.5-3.5S15.6 4 17.5 4s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: 15px 15px, 50px 50px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #f79a0e, #e68a00);
+            z-index: 1;
+            opacity: 0.75;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .info-dropdown {
@@ -113,6 +136,20 @@
 
         .nav-links a:hover {
             background-color: #d67a00;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
         }
 
         .search-box {
@@ -217,41 +254,43 @@
             margin: 0.5rem 0;
         }
 
-        .current-date {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #fff;
+        .header h1 {
+            font-size: 3.5rem;
             font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header h1 .paw-dot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 0.2rem;
+        }
+
+        .header h1 .paw-dot::before {
+            content: "🐾";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Tenencia Responsable de Animales de Compañía</h1>
+        <h1>Patitas<span class="paw-dot"></span>Informadas</h1>
         <p>Lo mas importante para los regalones de tu hogar</p>
-        <div class="current-date" id="currentDate"></div>
-        <button class="toggle-info" onclick="toggleInfo()">Más información sobre tenencia responsable</button>
-        <div class="info-dropdown" id="infoDropdown">
-            <h2>¿Qué es la tenencia responsable?</h2>
-            <div class="info-content">
-                <div class="info-section">
-                    <h3>Compromiso</h3>
-                    <p>La tenencia responsable implica un compromiso de por vida con tu mascota, incluyendo su bienestar físico y emocional.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Obligaciones</h3>
-                    <p>Incluye proporcionar alimentación adecuada, atención veterinaria, ejercicio, socialización y un ambiente seguro.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Beneficios</h3>
-                    <p>Mejora la calidad de vida tanto de la mascota como del dueño, creando un vínculo emocional positivo.</p>
-                </div>
-                <div class="info-section">
-                    <h3>Responsabilidades Legales</h3>
-                    <p>Implica cumplir con las leyes locales sobre tenencia de mascotas, incluyendo registro y vacunación.</p>
-                </div>
-            </div>
-        </div>
         <nav class="nav-bar">
             <div class="nav-links">
                 <a href="index.html">Inicio</a>
@@ -261,9 +300,12 @@
                 <a href="gatos.html">Gatos</a>
                 <a href="contacto.html">Contacto</a>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar consejos...">
-                <button type="button">Buscar</button>
+            <div class="search-container">
+                <div class="current-date" id="currentDate"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar consejos...">
+                    <button type="button">Buscar</button>
+                </div>
             </div>
         </nav>
     </header>
@@ -322,7 +364,7 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2024 Tenencia Responsable de Animales de Compañía. Todos los derechos reservados.</p>
+        <p>&copy; Patitas Informadas. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -339,22 +381,6 @@
             document.getElementById('currentDate').textContent = `${dayName}, ${day} de ${month} de ${year}`;
         }
 
-        function toggleInfo() {
-            const dropdown = document.getElementById('infoDropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        // Cerrar el dropdown cuando se hace clic fuera de él
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('infoDropdown');
-            const toggleButton = document.querySelector('.toggle-info');
-            
-            if (!dropdown.contains(event.target) && !toggleButton.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
-
-        // Actualizar la fecha cuando se carga la página
         updateDate();
     </script>
 </body>
